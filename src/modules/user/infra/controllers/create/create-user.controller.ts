@@ -1,5 +1,10 @@
 import { Body, Controller, HttpCode, HttpStatus, Post } from '@nestjs/common'
-import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger'
+import {
+  ApiBody,
+  ApiConflictResponse,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger'
 import { z } from 'zod'
 
 import CreateUserDTO from '@/modules/user/application/dtos/create-user.dto'
@@ -23,7 +28,11 @@ export default class CreateUserController {
   @HttpCode(HttpStatus.CREATED)
   @ApiResponse({
     status: HttpStatus.CREATED,
-    description: 'Successful response',
+    description: 'Successful',
+    type: null,
+  })
+  @ApiConflictResponse({
+    description: 'Conflict',
     type: null,
   })
   @ApiBody({ type: CreateUserDTO })
